@@ -59,14 +59,14 @@ export default function ProductViewModal({open, setOpen, product, isAvailable}) 
 
                                 {isAvailable ? (
                                     <Status
-                                        text ="In Stock"
+                                        text="In Stock"
                                         icon={MdDone}
                                         bg="bg-teal-200"
                                         color="text-teal-900"
-                                        />
+                                    />
                                 ) : (
                                     <Status
-                                        text ="Out-Of-Stock"
+                                        text="Out-Of-Stock"
                                         icon={MdClose}
                                         bg="bg-teal-200"
                                         color="text-teal-900"

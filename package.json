@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prod": "vite --mode production",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -23,7 +24,9 @@
     "react-dom": "^19.1.1",
     "react-hot-toast": "^2.6.0",
     "react-icons": "^5.5.0",
+    "react-loader-spinner": "^7.0.3",
     "react-redux": "^9.2.0",
+    "react-router-dom": "^7.9.3",
     "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
