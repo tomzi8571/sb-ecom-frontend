@@ -13,14 +13,18 @@ export const ProductCard = (
         quantity,
         discount,
         specialPrice,
+        about = false
     }) => {
     const [openProductViewModal, setOpenProductViewModal] = useState(false);
     const btnLoader = false;
     const [selectedViewProduct, setSelectedViewProduct] = useState("");
     const isAvailable = quantity && Number(quantity) > 0;
+
     const handleProductView = (product) => {
-        setSelectedViewProduct(product);
-        setOpenProductViewModal(true);
+        if (!about) {
+            setSelectedViewProduct(product);
+            setOpenProductViewModal(true);
+        }
     }
 
     return (
@@ -66,42 +70,44 @@ export const ProductCard = (
 
                 </div>
 
-                <div className="flex items-center justify-between">
-                    {specialPrice ? (
-                        <div className="flex flex-col mt-4">
-                    <span className="text-gray-400 line-through">
-                        ${Number(price).toFixed(2)}
-                    </span>
+                {!about && (
+                    <div className="flex items-center justify-between">
+                        {specialPrice ? (
+                            <div className="flex flex-col mt-4">
+                                <span className="text-gray-400 line-through">
+                                    ${Number(price).toFixed(2)}
+                                </span>
+                                <span className="text-xl font-bold text-slate-700">
+                                    ${Number(specialPrice).toFixed(2)}
+                                </span>
+                            </div>
+                        ) : (
                             <span className="text-xl font-bold text-slate-700">
-                        ${Number(specialPrice).toFixed(2)}
-                    </span>
-                        </div>
-                    ) : (
-                        <span className="text-xl font-bold text-slate-700">
                         {"   "}
-                            ${Number(price).toFixed(2)}
+                                ${Number(price).toFixed(2)}
                     </span>
-                    )}
-                    <button
-                        disabled={!isAvailable || btnLoader}
-                        onClick={() => {
-                            handleProductView({
-                                id: productId,
-                                image,
-                                productName,
-                                description,
-                                price,
-                                quantity,
-                                discount,
-                                specialPrice,
-                            });
-                        }}
-                        className={`bg-blue-500  text-white py-2 px-3 rounded-lg items-center transition-colors duration-300 w-36 flex justify-center
+                        )}
+                        <button
+                            disabled={!isAvailable || btnLoader}
+                            onClick={() => {
+                                handleProductView({
+                                    id: productId,
+                                    image,
+                                    productName,
+                                    description,
+                                    price,
+                                    quantity,
+                                    discount,
+                                    specialPrice,
+                                });
+                            }}
+                            className={`bg-blue-500  text-white py-2 px-3 rounded-lg items-center transition-colors duration-300 w-36 flex justify-center
                                     ${isAvailable ? "opacity-100 hover:bg-blue-600" : "opacity-70"}`}>
-                        <FaShoppingCart className="mr-2"/>
-                        {isAvailable ? "Add to Cart" : "Out of Stock"}
-                    </button>
-                </div>
+                            <FaShoppingCart className="mr-2"/>
+                            {isAvailable ? "Add to Cart" : "Out of Stock"}
+                        </button>
+                    </div>
+                )}
             </div>
             <ProductViewModal open={openProductViewModal}
                               setOpen={setOpenProductViewModal}
