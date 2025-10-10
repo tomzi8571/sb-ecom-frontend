@@ -7,7 +7,7 @@
 - react-icons 
 - react-hot-toast -> toast messages
 - headlessUI -> modal
-- material-ui 
+- material-ui : https://mui.com/material-ui/
 - react-loader-spinners -> loading
 - swiper -> HeroBanner
 

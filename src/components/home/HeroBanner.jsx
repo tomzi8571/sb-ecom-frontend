@@ -14,7 +14,7 @@ const colors = ["bg-banner-color1", "bg-banner-color2", "bg-banner-color3"]
 
 export const HeroBanner = () => {
     return (
-        <div className={"py-2 round-md"}>
+        <div className="py-2 round-md">
             <Swiper
                 grabCursor={true}
                 autoplay={{
@@ -53,7 +53,7 @@ export const HeroBanner = () => {
                                     </div>
                                 </div>
                                 <div className={"w-full flex justify-center lg:w-1/2 p-4"}>
-                                    <img src={item?.image}/>
+                                    <img src={item?.image} alt={item.title}/>
                                 </div>
                             </div>
                         </div>

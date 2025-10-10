@@ -1,13 +1,21 @@
 import {Link, useLocation} from "react-router-dom";
 import {FaShoppingCart, FaSignInAlt, FaStore} from "react-icons/fa";
 import {Badge} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {RxCross2} from "react-icons/rx";
 import {IoIosMenu} from "react-icons/io";
+import {useSelector} from "react-redux";
 
 export const Navbar = () => {
     const path = useLocation().pathname;
     const [navbarOpen, setNavbarOpen] = useState(false);
+    const {cart} = useSelector(state => state.carts);
+    const [totalItems, setTotalItems] = useState(cart ? cart.length : 0);
+
+    useEffect(() => {
+        setTotalItems(cart ? cart.length : 0);
+    }, [cart])
+
     return (
         <div className="h-[70px] bg-custom-gradient text-white z-50 flex items-center justify-center sticky top-0">
             <div className={"lg:px-14 sm:px-8 px-4 w-full flex justify-between"}>
@@ -15,7 +23,7 @@ export const Navbar = () => {
                     <FaStore className={"mr-2 text-3xl"}/>
                     <span className={"font-[Poppins]"}>E-Shop</span>
                 </Link>
-                <ul className={`flex sm:gap-10 gap-4 sm:items-center  text-slate-800 sm:static absolute left-0 
+                <ul className={`flex sm:gap-6 md:gap-10 gap-4 sm:items-center  text-slate-800 sm:static absolute left-0 
                 top-[70px] sm:shadow-none shadow-md 
                 ${navbarOpen ? "h-fit sm:pb-0 pb-5" : "h-0 overflow-hidden"}  
                 transition-all duration-100 sm:h-fit sm:bg-none bg-custom-gradient   
@@ -65,7 +73,7 @@ export const Navbar = () => {
                               onClick={() => setNavbarOpen(false)}>
                             <Badge
                                 showZero={true}
-                                badgeContent={0}
+                                badgeContent={totalItems}
                                 color={"primary"}
                                 overlap={"circular"}
                                 anchorOrigin={{vertical: "top", horizontal: "right"}}>

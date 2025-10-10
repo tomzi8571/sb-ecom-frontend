@@ -19,7 +19,6 @@ export const productReducer = (state = initialState, action) => {
                     lastPage: action.lastPage,
                 }
             }
-            console.log(spreadElements);
             return spreadElements
         }
         case "FETCH_CATEGORIES":
