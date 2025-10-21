@@ -5,6 +5,7 @@ import {SetQuantity} from "./SetQuantity.jsx";
 import {useDispatch} from "react-redux";
 import {decreaseCartQuantity, increaseCartQuantity, removeFromCart} from "../../store/actions/index.js";
 import toast from "react-hot-toast";
+import {formatPrice} from "../../utils/formatPrice.js";
 
 export const ItemContent = ({
                                 productId,
@@ -26,8 +27,7 @@ export const ItemContent = ({
     }
 
     const handleQuantityDecrease = (productId) => {
-        dispatch(decreaseCartQuantity(productId, toast, currentQuantity, setCurrentQuantity
-        ));
+        dispatch(decreaseCartQuantity(productId, toast, currentQuantity, setCurrentQuantity));
     }
 
     const removeItemFromCart = (productId) => {
@@ -61,7 +61,7 @@ export const ItemContent = ({
             </div>
 
             <div className="justify-self-center lg:text-[17px] text-sm text-slate-600 font-semibold">
-                {Number(specialPrice)}
+                {formatPrice(specialPrice)}
             </div>
             <div className="justify-self-center">
                 <SetQuantity
@@ -71,7 +71,7 @@ export const ItemContent = ({
                     handleQtyDecrease={() => handleQuantityDecrease(productId)}/>
             </div>
             <div className="justify-self-center lg:text-[17px] text-sm text-slate-600 font-semibold">
-                {Number(currentQuantity * Number(specialPrice)).toFixed(2)}
+                {formatPrice(currentQuantity * Number(specialPrice))}
             </div>
         </div>
 
