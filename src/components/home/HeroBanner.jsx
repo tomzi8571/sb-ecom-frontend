@@ -26,8 +26,6 @@ export const HeroBanner = () => {
                 pagination={{clickable: true}}
                 scrollbar={{draggable: true}}
                 slidesPerView={1}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
             >
                 {bannerList.map((item, index) => (
                     <SwiperSlide key={item.id}>

@@ -5,12 +5,15 @@ import {useEffect, useState} from "react";
 import {RxCross2} from "react-icons/rx";
 import {IoIosMenu} from "react-icons/io";
 import {useSelector} from "react-redux";
+import {UserMenu} from "../UserMenu.jsx";
 
 export const Navbar = () => {
     const path = useLocation().pathname;
     const [navbarOpen, setNavbarOpen] = useState(false);
     const {cart} = useSelector(state => state.carts);
+    const {user} = useSelector(state => state.auth);
     const [totalItems, setTotalItems] = useState(cart ? cart.length : 0);
+
 
     useEffect(() => {
         setTotalItems(cart ? cart.length : 0);
@@ -81,18 +84,27 @@ export const Navbar = () => {
                             </Badge>
                         </Link>
                     </li>
-                    <li className={"font-[500] transition-all duration-150"}>
-                        <Link className="flex item-center space-x-2 px-4 py-[6px]
+                    {user && user.id
+                        ? (
+                            <li className={"font-[500] transition-all duration-150"}>
+                                <UserMenu/>
+                            </li>
+                        )
+                        : (
+                            <li className={"font-[500] transition-all duration-150"}>
+                                <Link className="flex item-center space-x-2 px-4 py-[6px]
                                      bg-gradient-to-r from-purple-600 to-red-500
                                          text-white font-semibold rounded-md shadow-lg
                                          hover:from-purple-500 hover:to-red-400 transition
                                          duration-300 ease-in-out transform"
-                              to="/login"
-                              onClick={() => setNavbarOpen(false)}>
-                            <FaSignInAlt size={25}/>
-                            <span className={""}>Login</span>
-                        </Link>
-                    </li>
+                                      to="/login"
+                                      onClick={() => setNavbarOpen(false)}>
+                                    <FaSignInAlt size={25}/>
+                                    <span className={""}>Login</span>
+                                </Link>
+                            </li>
+                        )}
+
                 </ul>
                 <button
                     onClick={() => setNavbarOpen(!navbarOpen)}

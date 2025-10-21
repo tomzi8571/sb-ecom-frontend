@@ -43,7 +43,7 @@ export const Home = () => {
                             className="pb-6 pt-14 grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-y-6 gap-x-6">
                             {products &&
                                 products?.slice(0, 4).map((item, index) => (
-                                    <ProductCard {...item}/>
+                                    <ProductCard key={index} {...item}/>
                                 ))}
                         </div>
                     )
