@@ -10,11 +10,11 @@ import {Cart} from "./components/cart/Cart.jsx";
 import {Login} from "./components/auth/Login.jsx";
 import {PrivateRoute} from "./components/PrivateRoute.jsx";
 import {Register} from "./components/auth/Register.jsx";
+import {Checkout} from "./components/checkout/Checkout.jsx";
 
 function App() {
 
-    return (
-        <>
+    return (<>
             <Router>
                 <Navbar/>
                 <Routes>
@@ -23,6 +23,7 @@ function App() {
                     <Route path="/about" element={<About/>}/>
                     <Route path="/contact" element={<Contact/>}/>
                     <Route path="/cart" element={<Cart/>}/>
+                    <Route path="/checkout" element={<Checkout/>}/>
                     <Route path="/" element={<PrivateRoute publicPage/>}>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>

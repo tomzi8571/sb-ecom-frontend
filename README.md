@@ -10,6 +10,8 @@
 - material-ui : https://mui.com/material-ui/
 - react-loader-spinners -> loading
 - swiper -> HeroBanner
+- Stepper (Material UI) -> Checkout
+- Dialog Modal -> headless UI Dialog
 
 # Images 
 Freely available images from pexels.com

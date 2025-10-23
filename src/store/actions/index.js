@@ -185,3 +185,25 @@ export const logoutUser = (navigate) => async (dispatch) => {
     localStorage.removeItem("auth");
     navigate("/login");
 };
+
+export const addUpdateUserAddress = (sendData, toast, addressId, setOpenModal) => async (dispatch, getState) => {
+    try {
+        dispatch({type: "BUTTON_LOADER"});
+        const {data} = await api.post(`/addresses`, sendData);
+        toast.success("Address successfully saved");
+        dispatch({type: "IS_SUCCESS"});
+        setOpenModal(false);
+    } catch (error) {
+        console.log(error);
+        toast.error(error?.response?.data?.message || "Ooops, internal server error, address couldn't be saved");
+        dispatch({
+            type: "IS_ERROR",
+            payload: error?.response?.data?.message || "internal server error, address couldn't be saved"
+        });
+        if (error?.response?.data?.type === "validation") {
+            setOpenModal(true);
+        } else {
+            setOpenModal(false);
+        }
+    }
+}
