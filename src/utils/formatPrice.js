@@ -8,3 +8,7 @@ export const formatPrice = (price) => {
         }
     ).format(Number(price).toFixed(2))
 }
+
+export const formatCalculatedPrice = (price, quantity) => {
+    return formatPrice(Number(price) * Number(quantity))
+}

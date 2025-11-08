@@ -3,19 +3,33 @@ import {FaAddressBook} from "react-icons/fa";
 import {useState} from "react";
 import {AddressInfoModal} from "./AddressInfoModal.jsx";
 import {AddAddressForm} from "./AddAddressForm.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {AddressList} from "./AddressList.jsx";
+import DeleteModal from "./DeleteModal.jsx";
+import {deleteUserAddress} from "../../store/actions/index.js";
+import toast from "react-hot-toast";
 
-export const AddressInfo = () => {
-    const noAddressExists = true;
-    const isLoading = false;
+export const AddressInfo = ({address}) => {
+    const noAddressExists = !address || address.length === 0;
+    const {isLoading, btnLoader} = useSelector(state => state.errors);
 
     const [openAddressModel, setOpenAddressModel] = useState(false);
-    const [selecteetAddress, setSelecteetAddress] = useState("");
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [selectedAddress, setSelectedAddress] = useState("");
 
     const addNewAddressHandler = () => {
-        setSelecteetAddress("");
+        setSelectedAddress("");
         setOpenAddressModel(true);
     };
-
+    const dispatch = useDispatch();
+    const deleteAddressHandler = () => {
+        console.log("Delete Address Clicked", selectedAddress)
+        dispatch(deleteUserAddress(
+            toast,
+            selectedAddress?.addressId,
+            setOpenDeleteModal
+        ))
+    }
     return (
         <div className="pt-4">
             {noAddressExists ? (
@@ -43,19 +57,41 @@ export const AddressInfo = () => {
                             <div className="py-4 px-8">
                                 <Skeleton/>
                             </div>
-                        ) : (
-                            <div className="space-y-4 pt-6">
-                                <p>Address List here...</p>
-                            </div>
-                        )}
-                    </div>
-                )}
-            <AddressInfoModal open={openAddressModel} setOpen={setOpenAddressModel}>
-                <AddAddressForm address={selecteetAddress}
-                                setAddress={setSelecteetAddress}
-                                setOpen={setOpenAddressModel}/>
-            </AddressInfoModal>
+                        ) : (<>
+                                <div className="space-y-4 pt-6">
+                                    <AddressList addresses={address}
+                                                 setSelectedAddress={setSelectedAddress}
+                                                 setOpenAddressModel={setOpenAddressModel}
+                                                 setOpenDeleteModal={setOpenDeleteModal}
+                                    />
+                                </div>
 
+                                {address.length > 0 && (
+                                    <div className="mt-4">
+                                        <button
+                                            className="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-all"
+                                            onClick={addNewAddressHandler}>
+                                            Add More
+                                        </button>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                        <AddressInfoModal open={openAddressModel} setOpen={setOpenAddressModel}>
+                            <AddAddressForm address={selectedAddress}
+                                            setAddress={setSelectedAddress}
+                                            setOpen={setOpenAddressModel}/>
+                        </AddressInfoModal>
+                        <DeleteModal
+                            open={openDeleteModal}
+                            loader={btnLoader}
+                            setOpen={setOpenDeleteModal}
+                            title="Delete Address"
+                            onDeleteHandler={deleteAddressHandler}/>
+
+                    </div>
+                )
+            }
         </div>
     )
 }

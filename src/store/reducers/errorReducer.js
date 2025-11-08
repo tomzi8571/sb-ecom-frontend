@@ -8,7 +8,7 @@ const initialState = {
 
 export const errorReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "IS_FETCHING_PRODUCTS":
+        case "IS_FETCHING":
             return {
                 ...state,
                 isLoading: true,

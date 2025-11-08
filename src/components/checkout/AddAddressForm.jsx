@@ -6,6 +6,7 @@ import {useForm} from "react-hook-form";
 import {FaAddressCard} from "react-icons/fa";
 import {addUpdateUserAddress} from "../../store/actions/index.js";
 import toast from "react-hot-toast";
+import {useEffect} from "react";
 
 export const AddAddressForm = ({address, setAddress, setOpen}) => {
 
@@ -16,6 +17,7 @@ export const AddAddressForm = ({address, setAddress, setOpen}) => {
         register,
         handleSubmit,
         reset,
+        setValue,
         formState: {errors},
     } = useForm({
         mode: "onTouched"
@@ -28,6 +30,17 @@ export const AddAddressForm = ({address, setAddress, setOpen}) => {
             address?.addressId,
             setOpen))
     };
+
+    useEffect(() => {
+        if (address?.addressId) {
+            setValue("buildingName", address?.buildingName)
+            setValue("street", address?.street)
+            setValue("city", address?.city)
+            setValue("state", address?.state)
+            setValue("pincode", address?.pincode)
+            setValue("country", address?.country )
+        }
+    }, [address])
     return (
         <div className="">
             <form
@@ -36,7 +49,7 @@ export const AddAddressForm = ({address, setAddress, setOpen}) => {
             >
                 <div className="flex justify-center items-center mb-4 font-semibold text-2xl text-slate-800 py-2 px-4">
                     <FaAddressCard className="mr-2 text-2xl"/>
-                    Add Address
+                    {address?.addressId ? "Update Address" : "Add Address"}
                 </div>
                 <div className="flex flex-col gap-4">
                     <InputField
