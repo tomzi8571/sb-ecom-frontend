@@ -27,8 +27,8 @@ function App() {
 
                     <Route path="/" element={<PrivateRoute/>}>
                         <Route path="/checkout" element={<Checkout/>}/>
-                        <Route path="//order-confirm" element={<PaymentConfirmation/>}/>
                     </Route>
+                    <Route path="/order-confirm" element={<PaymentConfirmation/>}/>
 
                     <Route path="/" element={<PrivateRoute publicPage/>}>
                         <Route path="/login" element={<Login/>}/>
