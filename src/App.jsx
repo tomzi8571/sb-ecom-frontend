@@ -1,6 +1,6 @@
 import './App.css'
 import {Products} from "./components/products/Products.jsx";
-import {BrowserRouter as Router, HashRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {Home} from "./components/home/Home.jsx";
 import {Navbar} from "./components/shared/Navbar.jsx";
 import {About} from "./components/About.jsx";
@@ -16,7 +16,7 @@ import {PaymentConfirmation} from "./components/checkout/PaymentConfirmation.jsx
 function App() {
 
     return (<>
-            <HashRouter basename={`${import.meta.env.VITE_FRONTEND_BASE_URL}`}>
+            <Router basename={`${import.meta.env.VITE_FRONTEND_BASE_URL}`}>
                 <Navbar/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
@@ -35,7 +35,7 @@ function App() {
                         <Route path="/register" element={<Register/>}/>
                     </Route>
                 </Routes>
-            </HashRouter>
+            </Router>
             <Toaster position="top-center"/>
         </>
     )

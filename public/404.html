@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting…</title>
+    <script>
+        (function() {
+            var base = '__BASE__'; // replaced at postbuild
+            if (!base || base === '/' || base === './') base = '';
+            var pathname = location.pathname || '/';
+            if (base && pathname.indexOf(base) === 0) pathname = pathname.slice(base.length) || '/';
+            // build: base + '/#' + pathname + search + hash
+            var dest = base + '/#' + (pathname === '/' ? '/' : pathname) + location.search + location.hash;
+            dest = dest.replace(/\/{2,}/g, '/');
+            location.replace(dest);
+        })();
+    </script>
+</head>
+<body>Redirecting…</body>
+</html>
