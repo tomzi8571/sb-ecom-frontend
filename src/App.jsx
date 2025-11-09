@@ -16,7 +16,7 @@ import {PaymentConfirmation} from "./components/checkout/PaymentConfirmation.jsx
 function App() {
 
     return (<>
-            <Router>
+            <Router basename={`${import.meta.env.VITE_FRONTEND_BASE_URL}`}>
                 <Navbar/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
