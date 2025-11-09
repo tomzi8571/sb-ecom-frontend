@@ -77,21 +77,20 @@ export const AddressInfo = ({address}) => {
                                 )}
                             </>
                         )}
-                        <AddressInfoModal open={openAddressModel} setOpen={setOpenAddressModel}>
-                            <AddAddressForm address={selectedAddress}
-                                            setAddress={setSelectedAddress}
-                                            setOpen={setOpenAddressModel}/>
-                        </AddressInfoModal>
-                        <DeleteModal
-                            open={openDeleteModal}
-                            loader={btnLoader}
-                            setOpen={setOpenDeleteModal}
-                            title="Delete Address"
-                            onDeleteHandler={deleteAddressHandler}/>
-
                     </div>
                 )
             }
+            <AddressInfoModal open={openAddressModel} setOpen={setOpenAddressModel}>
+                <AddAddressForm address={selectedAddress}
+                                setAddress={setSelectedAddress}
+                                setOpen={setOpenAddressModel}/>
+            </AddressInfoModal>
+            <DeleteModal
+                open={openDeleteModal}
+                loader={btnLoader}
+                setOpen={setOpenDeleteModal}
+                title="Delete Address"
+                onDeleteHandler={deleteAddressHandler}/>
         </div>
     )
 }
