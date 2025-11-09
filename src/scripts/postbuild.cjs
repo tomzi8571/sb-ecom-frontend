@@ -1,19 +1,20 @@
 const fs = require('fs')
 const path = require('path')
 
-const distFile = path.join(process.cwd(), 'dist', '404.html')
-if (!fs.existsSync(distFile)) {
-    console.error('dist/404.html not found — make sure you have run `vite build` first')
-    process.exit(1)
+const distDir = path.join(process.cwd(), 'dist')
+const indexFile = path.join(distDir, 'index.html')
+const fourOhFourFile = path.join(distDir, '404.html')
+
+if (!fs.existsSync(indexFile)) {
+  console.error('dist/index.html not found — make sure you have run `vite build` first')
+  process.exit(1)
 }
 
-// Read env var set during build/deploy
-let base = process.env.VITE_FRONTEND_BASE_URL || '/'
-if (base === './') base = ''
-if (base !== '' && base.endsWith('/')) base = base.slice(0, -1)
-
-let content = fs.readFileSync(distFile, 'utf8')
-content = content.replace(/__BASE__/g, base)
-fs.writeFileSync(distFile, content, 'utf8')
-console.log('Updated dist/404.html with base:', base)
-
+try {
+  // Copy index.html -> 404.html so GH Pages will serve the SPA for unknown paths
+  fs.copyFileSync(indexFile, fourOhFourFile)
+  console.log('Copied dist/index.html -> dist/404.html')
+} catch (err) {
+  console.error('Failed to copy index.html -> 404.html', err)
+  process.exit(1)
+}
