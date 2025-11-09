@@ -10,7 +10,7 @@
             var pathname = location.pathname || '/';
             if (base && pathname.indexOf(base) === 0) pathname = pathname.slice(base.length) || '/';
             // build: base + '/#' + pathname + search + hash
-            var dest = base + '/#' + (pathname === '/' ? '/' : pathname) + location.search + location.hash;
+            var dest = base + '/' + (pathname === '/' ? '/' : pathname) + location.search + location.hash;
             dest = dest.replace(/\/{2,}/g, '/');
             location.replace(dest);
         })();
