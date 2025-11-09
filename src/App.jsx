@@ -1,6 +1,6 @@
 import './App.css'
 import {Products} from "./components/products/Products.jsx";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, HashRouter, Route, Routes} from "react-router-dom";
 import {Home} from "./components/home/Home.jsx";
 import {Navbar} from "./components/shared/Navbar.jsx";
 import {About} from "./components/About.jsx";
@@ -16,7 +16,7 @@ import {PaymentConfirmation} from "./components/checkout/PaymentConfirmation.jsx
 function App() {
 
     return (<>
-            <Router basename={`${import.meta.env.VITE_FRONTEND_BASE_URL}`}>
+            <HashRouter basename={`${import.meta.env.VITE_FRONTEND_BASE_URL}`}>
                 <Navbar/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
@@ -27,15 +27,15 @@ function App() {
 
                     <Route path="/" element={<PrivateRoute/>}>
                         <Route path="/checkout" element={<Checkout/>}/>
+                        <Route path="/order-confirm" element={<PaymentConfirmation/>}/>
                     </Route>
-                    <Route path="/order-confirm" element={<PaymentConfirmation/>}/>
 
                     <Route path="/" element={<PrivateRoute publicPage/>}>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                     </Route>
                 </Routes>
-            </Router>
+            </HashRouter>
             <Toaster position="top-center"/>
         </>
     )
