@@ -12,6 +12,7 @@
             // build: base + '/#' + pathname + search + hash
             var dest = base + '/' + (pathname === '/' ? '/' : pathname) + location.search + location.hash;
             dest = dest.replace(/\/{2,}/g, '/');
+            console.log("Redirecting to ", dest);
             location.replace(dest);
         })();
     </script>
